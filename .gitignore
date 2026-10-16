@@ -1,0 +1,17 @@
+
+# Secrets and private keys
+.env
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Local credentials and backups
+*.secret
+*.backup
+*.bak
+
+# Temporary files
+*.tmp
+*.log
+.DS_Store
