@@ -1,0 +1,4 @@
+ubuntu@ubuntuserver26:~$ sudo ufw status verbose
+[sudo: authenticate] Password:
+Status: inactive
+ubuntu@ubuntuserver26:~$
