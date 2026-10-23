@@ -1,0 +1,38 @@
+ubuntu@ubuntuserver26:~$ sudo apt install ufw -y
+ufw is already the newest version (0.36.2-9build1).
+ufw set to manually installed.
+Summary:                    
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 11
+ubuntu@ubuntuserver26:~$ sudo ufw status verbose
+Status: inactive
+ubuntu@ubuntuserver26:~$ sudo ufw default deny incoming
+[sudo: authenticate] Password:      
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+ubuntu@ubuntuserver26:~$ sudo ufw allow outgoing 
+ERROR: Could not find a profile matching 'outgoing'
+ubuntu@ubuntuserver26:~$ sudo ufw default allow outgoing
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+ubuntu@ubuntuserver26:~$ sudo ufw allow 22/tcp
+Rules updated
+Rules updated (v6)
+ubuntu@ubuntuserver26:~$ sudo ufw status verbose
+Status: inactive
+ubuntu@ubuntuserver26:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+ubuntu@ubuntuserver26:~$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp (OpenSSH)           ALLOW IN    Anywhere                  
+22/tcp                     ALLOW IN    Anywhere                  
+22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)             
+22/tcp (v6)                ALLOW IN    Anywhere (v6)             
+
+ubuntu@ubuntuserver26:~$ 
