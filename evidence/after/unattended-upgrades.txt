@@ -1,0 +1,86 @@
+┌──(almamun㉿kali)-[~]
+└─$ ssh ubuntu@10.10.10.20
+Last login: Thu Oct 22 13:50:54 2026 from 10.10.10.10
+ubuntu@ubuntuserver26:~$ sudo apt install unattended-upgrades -y
+[sudo: authenticate] Password:      
+unattended-upgrades is already the newest version (2.12ubuntu9).
+Summary:                    
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 11
+ubuntu@ubuntuserver26:~$ sudo dpkg-reconfigure --priority=low unattended-upgrades
+ubuntu@ubuntuserver26:~$ cat /etc/apt/apt.conf.d/20auto-upgrades
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+ubuntu@ubuntuserver26:~$ systemctl is-active unattended-upgrades.service
+active
+ubuntu@ubuntuserver26:~$ systemctl is-enabled unattended-upgrades.service
+enabled
+ubuntu@ubuntuserver26:~$ sudo nano /etc/apt/apt.conf.d/20auto-upgrades
+ubuntu@ubuntuserver26:~$ sudo unattended-upgrades --dry-run --debug
+loading plugins from ['/etc/unattended-upgrades/plugins/', '/usr/share/unattended-upgrades/plugins']
+Could not figure out development release: Distribution data outdated. Please check for an update for distro-info-data. See /usr/share/doc/distro-info-data/README.Debian for details.
+Starting unattended upgrades script
+Allowed origins are: o=Ubuntu,a=resolute, o=Ubuntu,a=resolute-security, o=UbuntuESMApps,a=resolute-apps-security, o=UbuntuESM,a=resolute-infra-security
+Initial blacklist: 
+Initial whitelist (not strict): 
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-backports_universe_i18n_Translation-en'  a=resolute-backports,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=24807 ID:17> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-backports_universe_binary-amd64_Packages'  a=resolute-backports,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=11149 ID:16> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_multiverse_i18n_Translation-en'  a=resolute-updates,c=multiverse,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=26839 ID:15> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_multiverse_binary-amd64_Packages'  a=resolute-updates,c=multiverse,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=152662 ID:14> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_universe_i18n_Translation-en'  a=resolute-updates,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=611621 ID:13> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_universe_binary-amd64_Packages'  a=resolute-updates,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=1617426 ID:12> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_restricted_i18n_Translation-en'  a=resolute-updates,c=restricted,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=1847298 ID:11> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_restricted_binary-amd64_Packages'  a=resolute-updates,c=restricted,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=3130674 ID:10> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_main_i18n_Translation-en'  a=resolute-updates,c=main,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=1892256 ID:9> with -32768 pin
+Marking not allowed <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_main_binary-amd64_Packages'  a=resolute-updates,c=main,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=3927810 ID:8> with -32768 pin
+Applying pinning: PkgFilePin(id=17, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-backports_universe_i18n_Translation-en'  a=resolute-backports,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=24807 ID:17>
+Applying pinning: PkgFilePin(id=16, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-backports_universe_binary-amd64_Packages'  a=resolute-backports,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=11149 ID:16>
+Applying pinning: PkgFilePin(id=15, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_multiverse_i18n_Translation-en'  a=resolute-updates,c=multiverse,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=26839 ID:15>
+Applying pinning: PkgFilePin(id=14, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_multiverse_binary-amd64_Packages'  a=resolute-updates,c=multiverse,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=152662 ID:14>
+Applying pinning: PkgFilePin(id=13, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_universe_i18n_Translation-en'  a=resolute-updates,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=611621 ID:13>
+Applying pinning: PkgFilePin(id=12, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_universe_binary-amd64_Packages'  a=resolute-updates,c=universe,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=1617426 ID:12>
+Applying pinning: PkgFilePin(id=11, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_restricted_i18n_Translation-en'  a=resolute-updates,c=restricted,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=1847298 ID:11>
+Applying pinning: PkgFilePin(id=10, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_restricted_binary-amd64_Packages'  a=resolute-updates,c=restricted,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=3130674 ID:10>
+Applying pinning: PkgFilePin(id=9, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_main_i18n_Translation-en'  a=resolute-updates,c=main,v=26.04,o=Ubuntu,l=Ubuntu arch='' site='bd.archive.ubuntu.com' IndexType='Debian Translation Index' Size=1892256 ID:9>
+Applying pinning: PkgFilePin(id=8, priority=-32768)
+Applying pin -32768 to package_file: <apt_pkg.PackageFile object: filename:'/var/lib/apt/lists/bd.archive.ubuntu.com_ubuntu_dists_resolute-updates_main_binary-amd64_Packages'  a=resolute-updates,c=main,v=26.04,o=Ubuntu,l=Ubuntu arch='amd64' site='bd.archive.ubuntu.com' IndexType='Debian Package Index' Size=3927810 ID:8>
+Using (^linux-.*-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^kfreebsd-.*-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^gnumach-.*-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^.*-modules-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^.*-kernel-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^linux-.*-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^kfreebsd-.*-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^gnumach-.*-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^.*-modules-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$|^.*-kernel-[1-9][0-9]*\.[0-9]+\.[0-9]+-[0-9]+(-.+)?$) regexp to find kernel packages
+Using (^linux-.*-7\.0\.0\-38\-generic$|^linux-.*-7\.0\.0\-38$|^kfreebsd-.*-7\.0\.0\-38\-generic$|^kfreebsd-.*-7\.0\.0\-38$|^gnumach-.*-7\.0\.0\-38\-generic$|^gnumach-.*-7\.0\.0\-38$|^.*-modules-7\.0\.0\-38\-generic$|^.*-modules-7\.0\.0\-38$|^.*-kernel-7\.0\.0\-38\-generic$|^.*-kernel-7\.0\.0\-38$|^linux-.*-7\.0\.0\-38\-generic$|^linux-.*-7\.0\.0\-38$|^kfreebsd-.*-7\.0\.0\-38\-generic$|^kfreebsd-.*-7\.0\.0\-38$|^gnumach-.*-7\.0\.0\-38\-generic$|^gnumach-.*-7\.0\.0\-38$|^.*-modules-7\.0\.0\-38\-generic$|^.*-modules-7\.0\.0\-38$|^.*-kernel-7\.0\.0\-38\-generic$|^.*-kernel-7\.0\.0\-38$) regexp to find running kernel packages
+Checking: libnss-systemd=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version libnss-systemd=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: libpam-systemd=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version libpam-systemd=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: libsystemd-shared=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version libsystemd-shared=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: libsystemd0=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version libsystemd0=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: libudev1=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version libudev1=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: snapd=2.77.1+ubuntu26.04.2 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version snapd=2.76.3+ubuntu26.04 in allowed origin [<Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: systemd=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version systemd=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: systemd-cryptsetup=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version systemd-cryptsetup=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: systemd-resolved=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version systemd-resolved=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: systemd-sysv=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version systemd-sysv=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+Checking: udev=259.9-0ubuntu0.1 ([<Origin component:'main' archive:'resolute-updates' origin:'Ubuntu' label:'Ubuntu' site:'bd.archive.ubuntu.com' isTrusted:True>])
+adjusting candidate to version udev=259.5-0ubuntu3.4 in allowed origin [<Origin component:'main' archive:'resolute-security' origin:'Ubuntu' label:'Ubuntu' site:'security.ubuntu.com' isTrusted:True>, <Origin component:'now' archive:'now' origin:'' label:'' site:'' isTrusted:False>]
+pkgs that look like they should be upgraded: 
+Fetched 0 B in 0s (0 B/s)                                                                  
+fetch.run() result: 0
+Packages blacklist due to conffile prompts: []
+No packages found that can be upgraded unattended and no pending auto-removals
+The list of kept packages can't be calculated in dry-run mode.
+upgrade result: True No packages found that can be upgraded unattended and no pending auto-removals
+ubuntu@ubuntuserver26:~$ 
