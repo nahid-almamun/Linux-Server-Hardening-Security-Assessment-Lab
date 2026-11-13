@@ -1,0 +1,51 @@
+ubuntu@ubuntuserver26:~$ nano security_check.sh
+ubuntu@ubuntuserver26:~$ chmod +x ~/security_check.sh
+ubuntu@ubuntuserver26:~$ sudo ./security_check.sh
+[sudo: authenticate] Password:      
+Linux Server Security Check
+Date: Thu Oct 22 04:11:16 PM UTC 2026
+
+=== SSH effective settings ===
+maxauthtries 3
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+allowusers ubuntu
+
+=== UFW firewall status ===
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp (OpenSSH)           ALLOW IN    Anywhere                  
+22/tcp                     ALLOW IN    Anywhere                  
+22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)             
+22/tcp (v6)                ALLOW IN    Anywhere (v6)             
+
+
+=== Fail2ban SSH jail ===
+Status for the jail: sshd
+|- Filter
+|  |- Currently failed:	0
+|  |- Total failed:	3
+|  `- Journal matches:	_SYSTEMD_UNIT=ssh.service + _COMM=sshd
+`- Actions
+   |- Currently banned:	0
+   |- Total banned:	1
+   `- Banned IP list:	
+
+=== Automatic Security Updates ===
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+active
+enabled
+
+=== Listening TCP Ports ===
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                                                 
+LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=589,fd=17))              
+LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=3449,fd=3),("systemd",pid=1,fd=137))
+LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=589,fd=19))              
+LISTEN 0      4096            [::]:22           [::]:*    users:(("sshd",pid=3449,fd=4),("systemd",pid=1,fd=138))
